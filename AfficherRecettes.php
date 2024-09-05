@@ -5,35 +5,35 @@
  <!DOCTYPE html>
  <html>
  <head>
- <title>Affichage des recettes</title>
+ <h1>Affichage des recettes</h1>
  </head>
  <body>
  <ul>
- <?php for ($lines = 0; $lines <= 1; $lines++): ?>
+ <?php for ($lines = 0; $lines < 1; $lines++): ?>
  <li>
  <?php
 $recipes = [
 [
 'title' => 'Cassoulet',
-'recipe' => '',
+'recipe' => 'Etape 1 : des flageolets',
 'author' => 'mickael.andrieu@exemple.com',
 'is_enabled' => true,
 ],
 [
 'title' => 'Couscous',
-'recipe' => '',
+'recipe' => 'Etape 1 : avoir du couscous',
 'author' => 'mickael.andrieu@exemple.com',
 'is_enabled' => false,
 ],
 [
 'title' => 'Escalope milanaise',
-'recipe' => '',
+'recipe' => 'Etape 1 : prenez une belle escalope',
 'author' => 'mathieu.nebra@exemple.com',
 'is_enabled' => true,
 ]
 ];
 foreach($recipes as $recipe) {
-echo $recipe['title'] . ' auteur : ' . $recipe['author'] . '<br>';
+echo '<h2>' .$recipe['title'] .'<h2/>' . '<br>' .'<h4>' . ' auteur : ' . $recipe['author'] . '</h4>' .'<br>' .'<h4>' .  $recipe['recipe'] . '</h4>' . '<br>';
 }?>
  </li>
  <?php endfor; ?>
