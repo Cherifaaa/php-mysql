@@ -19,27 +19,33 @@
 
         <!-- inclusion des variables et fonctions -->
         <?php
-            include_once('variables.php');
-            include_once('functions.php');
-            include_once('login.php');
+        session_start();
+        if (!isset($_SESSION['LOGGED_USER']) && isset($_COOKIE['LOGGED_USER'])) {
+            $_SESSION['LOGGED_USER'] = $_COOKIE['LOGGED_USER'];
+        }
+        include_once('variables.php');
+        include_once('functions.php');
+        include_once('login.php');
         ?>
+
 
         <!-- inclusion de l'entête du site -->
         <?php include_once('header.php'); ?>
         
-        <!-- Si l'utilisateur existe, on affiche les recettes -->
-         <?php if(isset($loggedUser)): ?>
-        <?php foreach(getRecipes($recipes) as $recipe) : ?>
-            <article>
-                <h3><?php echo $recipe['title']; ?></h3>
-                <div><?php echo $recipe['recipe']; ?></div>
-                <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
-            </article>
-        <?php endforeach ?>
+        <!-- Si l'utilisateur est connecté, on affiche les recettes -->
+        <?php if (isset($_SESSION['LOGGED_USER'])) : ?>
+            <?php foreach(getRecipes($recipes) as $recipe) : ?>
+                <article>
+                    <h3><?php echo $recipe['title']; ?></h3>
+                    <div><?php echo $recipe['recipe']; ?></div>
+                    <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
+                </article>
+            <?php endforeach ?>
+        <?php else: ?>
+            <p>Connectez vous pour voir les recettes.</p>
         <?php endif; ?>
     </div>
 
-    <!-- inclusion du bas de page du site -->
     <?php include_once('footer.php'); ?>
 </body>
 </html>
