@@ -54,6 +54,26 @@ $recipes = $recipesStatement->fetchAll();
 <?php endif; ?>
 
 
+<?php foreach($recipes as $recipe): ?>
+    <h3><?php echo $recipe['title']; ?></h3>
+    <p><?php echo $recipe['recipe']; ?></p>
+    
+    <?php if($recipe['author'] === $_SESSION['LOGGED_USER']): ?>
+        <a href="edit_recipe.php?id=<?php echo $recipe['recipe_id']; ?>">Modifier</a>
+        <a href="delete_recipe.php?id=<?php echo $recipe['recipe_id']; ?>" class="text-danger">Supprimer</a>
+    <?php endif; ?>
+<?php endforeach; ?>
+
+<form action="comment.php" method="post">
+    <input type="hidden" name="recipe_id" value="<?php echo $recipe['recipe_id']; ?>">
+    <div class="mb-3">
+        <label for="comment" class="form-label">Votre commentaire</label>
+        <textarea class="form-control" id="comment" name="comment" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+</form>
+
+
     </div>
 
     <?php include_once('footer.php'); ?>

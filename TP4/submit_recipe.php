@@ -21,7 +21,7 @@ if (!empty($_POST['title']) && !empty($_POST['recipe'])) {
         'is_enabled' => 1 // 1 = true, 0 = false
     ]);
 
-    header('index.php');
+    header('Location: index.php');
     exit();
 } else {
     echo 'remplir tous les champs.';
