@@ -12,3 +12,5 @@ INSERT INTO my_recipes.recipes (title,recipe,author,is_enabled) VALUES ('Salade 
 INSERT INTO my_recipes.users (full_name,email,password,age) VALUES ('Mickaël Andrieu','mickael.andrieu@exemple.com','S3cr3t',34);
 INSERT INTO my_recipes.users (full_name,email,password,age) VALUES ('Mathieu Nebra','mathieu.nebra@exemple.com','devine',34);
 INSERT INTO my_recipes.users (full_name,email,password,age) VALUES ('Laurène Castor','laurene.castor@exemple.com','P4ssW0rD',28);
+
+

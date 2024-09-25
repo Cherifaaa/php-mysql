@@ -39,14 +39,20 @@ $recipes = $recipesStatement->fetchAll();
 
 <!-- Affichage des recettes -->
 <?php if(isset($_SESSION['LOGGED_USER'])): ?>
-    <?php foreach($recipes as $recipe) : ?>
-        <article>
-            <h3><?php echo $recipe['title']; ?></h3>
-            <div><?php echo $recipe['recipe']; ?></div>
-            <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
-        </article>
-    <?php endforeach ?>
+    <h2>Ajouter une nouvelle recette</h2>
+    <form action="submit_recipe.php" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Titre de la recette</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="recipe" class="form-label">Recette</label>
+            <textarea class="form-control" id="recipe" name="recipe" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
 <?php endif; ?>
+
 
     </div>
 
