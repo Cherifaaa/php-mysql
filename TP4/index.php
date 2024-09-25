@@ -28,16 +28,26 @@
     
     <h1>Site de Recettes !</h1>
 
-    <!-- Si l'utilisateur existe, on affiche les recettes -->
-    <?php if(isset($_SESSION['LOGGED_USER'])): ?>
-        <?php foreach(getRecipes($recipes, 5) as $recipe) : ?>
-            <article>
-                <h3><?php echo $recipe['title']; ?></h3>
-                <div><?php echo $recipe['recipe']; ?></div>
-                <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
-            </article>
-        <?php endforeach ?>
-    <?php endif; ?>
+    <?php include_once('mysql.php'); ?>
+
+<?php
+$sqlQuery = 'SELECT * FROM recipes WHERE is_enabled = :is_enabled';
+$recipesStatement = $db->prepare($sqlQuery);
+$recipesStatement->execute(['is_enabled' => true]);
+$recipes = $recipesStatement->fetchAll();
+?>
+
+<!-- Affichage des recettes -->
+<?php if(isset($_SESSION['LOGGED_USER'])): ?>
+    <?php foreach($recipes as $recipe) : ?>
+        <article>
+            <h3><?php echo $recipe['title']; ?></h3>
+            <div><?php echo $recipe['recipe']; ?></div>
+            <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
+        </article>
+    <?php endforeach ?>
+<?php endif; ?>
+
     </div>
 
     <?php include_once('footer.php'); ?>
